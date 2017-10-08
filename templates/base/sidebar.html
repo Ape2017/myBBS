@@ -1,0 +1,14 @@
+{% import 'macro/panels.html' as panels %}
+<aside id="sidebar">
+    {% if g.user %}
+        {{ panels.panel_profile('个人信息', g.user) }}
+        {{ panels.panel_button(href=url_for('topic.create'), caption='发布话题') }}
+    {% else %}
+        {% call panels.panel('Enin的个人社区') %}
+            <div class="text-center">
+                你可以 <a href="{{ url_for('index.login') }}" class="btn btn-primary btn-xs">登录</a> 或
+                <a href="{{ url_for('index.register') }}" class="btn btn-primary btn-xs">注册</a>
+            </div>
+        {% endcall %}
+    {% endif %}
+</aside>

@@ -1,0 +1,15 @@
+{%- macro list_group_div(ls) %}
+    <div class="list-group">
+    {% for l in ls %}
+        {{ caller(l) }}
+    {% endfor %}
+    </div>
+{% endmacro -%}
+
+{%- macro list_group_ul(ls) %}
+    <ul class="list-group">
+    {% for l in ls %}
+        <li class="list-group-item">{{ caller(l) }}</li>
+    {% endfor %}
+    </ul>
+{% endmacro -%}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>bbs club</title>
+    <link href="https://cdn.bootcss.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/locale/zh-cn.js"></script>
+    {% block head_static %}{% endblock %}
+</head>
+<body>
+{% include 'base/navbar.html' %}
+<div id="main">
+    {% include 'base/sidebar.html' %}
+    <div id="content">
+        {% include 'base/alert.html' %}
+        {% block content %}
+            <div class="panel panel-default">
+                <div class="panel-heading">{% block content_header %}{% endblock %}</div>
+                <div class="panel-body">{% block content_body %}{% endblock %}</div>
+            </div>
+        {% endblock %}
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/time.js') }}"></script>
+{% block body_static %}{% endblock %}
+</body>
+</html>
