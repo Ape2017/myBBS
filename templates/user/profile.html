@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% import 'macro/panels.html' as panels %}
 {% import 'macro/lists.html' as lists %}
+{% block title %}{{ user.username }}的个人主页{% endblock %}
 {% block content_header %}
     {{ panels.breadcrumb('用户信息') }}
 {% endblock %}

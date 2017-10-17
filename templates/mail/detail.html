@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% import 'macro/panels.html' as panels %}
+{% block title %}{{ m.title }}{% endblock %}
 {% block head_static %}
     <script src="https://cdn.bootcss.com/marked/0.3.6/marked.min.js"></script>
     <link href="https://cdn.bootcss.com/github-markdown-css/2.8.0/github-markdown.min.css" rel="stylesheet">

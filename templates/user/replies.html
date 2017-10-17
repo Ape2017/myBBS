@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% import 'macro/panels.html' as panels %}
 {% import 'macro/lists.html' as lists %}
+{% block title %}{{ user.username }}最近参与的主题{% endblock %}
 {% block content %}
     {% call panels.heading() %}
         {{ panels.breadcrumb(user.username+' 的主页', active=false, url=url_for('user.profile', username=user.username)) }}
