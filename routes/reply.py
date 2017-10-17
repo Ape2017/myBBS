@@ -9,6 +9,7 @@ from flask import (
 )
 from models.topic import Topic
 from models.reply import Reply
+from routes.mail import inform_users
 from auth import (
     login_required,
     author_or_admin_required,
@@ -26,6 +27,7 @@ def add():
     form = request.form
     r = Reply.new(form, user_id=u.id)
     Topic.replied(r)
+    inform_users(form.get('content'), request.referrer)
     return redirect(request.referrer)
 
 

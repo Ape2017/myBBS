@@ -4,6 +4,7 @@ from routes.user import main as user_routes
 from routes.admin import main as admin_routes
 from routes.topic import main as topic_routes
 from routes.reply import main as reply_routes
+from routes.mail import main as mail_routes
 
 
 def create_app():
@@ -14,6 +15,7 @@ def create_app():
     app.register_blueprint(admin_routes, url_prefix='/admin')
     app.register_blueprint(topic_routes, url_prefix='/topic')
     app.register_blueprint(reply_routes, url_prefix='/reply')
+    app.register_blueprint(mail_routes, url_prefix='/mail')
     # 注册 Jinja2 模板中使用的全局函数 现在用g.user代替了
     # app.jinja_env.globals['current_user'] = current_user
     return app

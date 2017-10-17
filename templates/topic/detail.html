@@ -6,11 +6,7 @@
     <link href="https://cdn.bootcss.com/github-markdown-css/2.8.0/github-markdown.min.css" rel="stylesheet">
 {% endblock %}
 {% block content_header %}
-    <ul class='breadcrumb'>
-        <li><a href='{{ url_for('index.index') }}'>主页</a></li>
-        <li class='active'><a href="{{ url_for('index.index', board_id=topic.board_id) }}">{{ topic.board_title() }}</a>
-        </li>
-    </ul>
+    {{ panels.breadcrumb(topic.board_title(), active=false, url=url_for('index.index', board_id=topic.board_id)) }}
     <h3>{{ topic.title }}</h3>
     <div class="text-muted">
         {% if g.user.id == topic.user_id or g.user.admin %}
@@ -25,9 +21,10 @@
         {% endif %}
         <small>
             <span class="about-topic">
+                {% set author = topic.user() %}
                 <span>发布于 <span class="time-stamp">{{ topic.created_time }}</span></span>
                 <span>作者
-                    <a href="{{ url_for('user.profile', username=topic.user().username) }}">{{ topic.user().username }}</a>
+                    <a href="{{ url_for('user.profile', username=author.username) }}">{{ author.username }}</a>
                 </span>
                 <span>{{ topic.views }} 次浏览</span>
                 {% if topic.edited_time != 0 %}
@@ -62,9 +59,10 @@
                                         </a>
                                     </span>
                                 {% endif %}
-                                <img class="user-avatar-sm" src="{{ r.user().user_avatar }}">
-                                <a href="{{ url_for('user.profile', username=r.user().username) }}">
-                                    <span>{{ r.user().username }}</span>
+                                {% set replier = r.user() %}
+                                <img class="user-avatar-sm" src="{{ replier.user_avatar }}">
+                                <a href="{{ url_for('user.profile', username=replier.username) }}">
+                                    <span>{{ replier.username }}</span>
                                 </a>
                                 <span>{{ loop.index }}楼 • <span class="time-stamp">{{ r.created_time }}</span></span>
                             </small>

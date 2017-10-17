@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% import 'macro/topics.html' as topics %}
+{% import 'macro/lists.html' as lists %}
 {% block content %}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -21,9 +21,9 @@
                 {% endfor %}
             {% endif %}
         </div>
-        {{ topics.list(ts) }}
+        {{ lists.topic(ts) }}
         <div class="panel-footer panel-footer-pagination">
-            {{ topics.pagination(page, pages, b_id) }}
+            {{ lists.pagination(page, pages, b_id) }}
         </div>
     </div>
 

@@ -35,7 +35,7 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         if g.user is None:
             flash('请先登录', 'error')
-            return redirect(request.referrer)
+            return redirect(url_for('index.login'))
         return f(*args, **kwargs)
     return decorated_function
 

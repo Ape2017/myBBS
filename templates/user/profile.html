@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% import 'macro/panels.html' as panels %}
-{% import 'macro/topics.html' as topics %}
+{% import 'macro/lists.html' as lists %}
 {% block content_header %}
     {{ panels.breadcrumb('用户信息') }}
 {% endblock %}
@@ -20,13 +20,13 @@
 {% block content %}
     {{ super() }}
     {% call panels.panel_heading('最近创建的主题') %}
-        {{ topics.list(ts) }}
+        {{ lists.topic(ts) }}
         {% call panels.panel_footer() %}
             <a href="{{ url_for('user.topics', id=user.id) }}">察看更多»</a>
         {% endcall %}
     {% endcall %}
     {% call panels.panel_heading('最近回复的主题') %}
-        {{ topics.list(rts) }}
+        {{ lists.topic(rts) }}
         {% call panels.panel_footer() %}
             <a href="{{ url_for('user.replies', id=user.id) }}">察看更多»</a>
         {% endcall %}
