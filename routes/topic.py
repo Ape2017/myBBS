@@ -10,6 +10,7 @@ from flask import (
 )
 from models.board import Board
 from models.topic import Topic
+from routes.mail import inform_users
 from auth import (
     login_required,
     author_or_admin_required,
@@ -33,7 +34,9 @@ def add():
     form = request.form
     u = g.user
     t = Topic.new(form, user_id=u.id)
-    return redirect(url_for('topic.detail', t_id=t.id))
+    url = url_for('topic.detail', t_id=t.id)
+    inform_users(form.get('content'), url)
+    return redirect(url)
 
 
 @main.route('/<int:t_id>')

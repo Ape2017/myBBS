@@ -20,6 +20,11 @@ class Reply(Model):
         u = User.find_by(id=self.user_id)
         return u
 
+    def topic(self):
+        from models.topic import Topic
+        t = Topic.find_by(id=self.topic_id)
+        return t
+
     def update_reply(self, form):
         self.content = form.get('content')
         self.update()

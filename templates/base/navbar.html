@@ -28,8 +28,13 @@
                     ] %}
             {% endif -%}
             <ul class="nav navbar-nav navbar-right">
+                {% set counts = g.user.unread_counts() %}
                 {% for href, caption in navbar -%}
+                    {% if caption == '消息' and counts != 0 %}
+                        <li><a href="{{ href }}">{{ caption }} <span class="badge">{{ counts }}</span></a></li>
+                    {% else %}
                     <li><a href="{{ href }}">{{ caption }}</a></li>
+                    {% endif %}
                 {% endfor %}
                 {% if g.user.admin %}
                     <li><a href="{{ url_for('admin.index') }}">管理员</a></li>

@@ -77,5 +77,10 @@ class User(Model):
             u.update()
             return True
 
+    def unread_counts(self):
+        from models.mail import Mail
+        counts = Mail.count(receiver_id=self.id, read=False)
+        return counts
+
 
 

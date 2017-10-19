@@ -6,6 +6,7 @@ from flask import (
     flash,
     g,
     abort,
+    url_for,
 )
 from models.topic import Topic
 from models.reply import Reply
@@ -23,11 +24,11 @@ main = Blueprint('reply', __name__)
 @login_required
 @token_required
 def add():
-    u = g.user
     form = request.form
-    r = Reply.new(form, user_id=u.id)
+    r = Reply.new(form, user_id=g.user.id)
     Topic.replied(r)
-    inform_users(form.get('content'), request.referrer)
+    url = url_for('topic.detail', t_id=r.topic_id, _anchor=r.topic().num_of_replies())
+    inform_users(form.get('content'), url)
     return redirect(request.referrer)
 
 

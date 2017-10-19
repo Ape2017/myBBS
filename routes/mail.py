@@ -22,9 +22,9 @@ main = Blueprint('mail', __name__)
 @login_required
 def index():
     u_id = g.user.id
-    unread_mails = Mail.find_all(receiver_id=u_id, read=False)
-    old_mails = Mail.find_all(receiver_id=u_id, read=True)
-    sent_mails = Mail.find_all(sender_id=u_id)
+    unread_mails = Mail.find_all(receiver_id=u_id, read=False, __sort=('created_time', -1))
+    old_mails = Mail.find_all(receiver_id=u_id, read=True, __sort=('created_time', -1))
+    sent_mails = Mail.find_all(sender_id=u_id, url=False, __sort=('created_time', -1))
     return render_template('mail/index.html', unread_mails=unread_mails, old_mails=old_mails, sent_mails=sent_mails)
 
 
@@ -51,17 +51,24 @@ def detail(m_id):
         abort(403)
     else:
         m.mark_read()
-        return render_template('mail/detail.html', m=m)
+        if m.url:
+            return redirect(m.content)
+        else:
+            return render_template('mail/detail.html', m=m)
 
 
 def users_from_content(content):
-    parts = content.split(' ')
+    intab = '.,?!。，、？！'
+    outtab = ' '
+    table = str.maketrans(intab, outtab*len(intab))
+    parts = content.translate(table).split()
     users = []
     for p in parts:
         if p.startswith('@'):
             username = p[1:]
             u = User.find_by(username=username)
-            users.append(u)
+            if u is not None:
+                users.append(u)
     return users
 
 
@@ -70,7 +77,7 @@ def inform_users(content, url):
     receivers = users_from_content(content)
     for r in receivers:
         form = dict(
-            title='你被 {} AT 了'.format(sender.username),
+            title='用户 “{}” AT 了你'.format(sender.username),
             content=url,
             sender_id=sender.id,
             receiver_id=r.id,
