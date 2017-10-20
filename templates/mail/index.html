@@ -3,6 +3,10 @@
 {% import 'macro/panels.html' as panels %}
 {% import 'macro/lists.html' as lists %}
 {% block title %}消息{% endblock %}
+{% block sidebar %}
+    {{ super() }}
+    {{ panels.panel_button(href=url_for('mail.read_all', token=session.get('token')), caption='全部设为已读') }}
+{% endblock %}
 {% block content_header %}
     {{ panels.breadcrumb('发送消息') }}
 {% endblock %}

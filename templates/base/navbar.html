@@ -19,6 +19,7 @@
                         (url_for('user.setting'), '设置'),
                         (url_for('user.log_out'), '登出'),
                     ] %}
+                {% set counts = g.user.unread_counts() %}
             {% else %}
                 {% set navbar = [
                         (url_for('index.index'), '首页'),
@@ -28,7 +29,6 @@
                     ] %}
             {% endif -%}
             <ul class="nav navbar-nav navbar-right">
-                {% set counts = g.user.unread_counts() %}
                 {% for href, caption in navbar -%}
                     {% if caption == '消息' and counts != 0 %}
                         <li><a href="{{ href }}">{{ caption }} <span class="badge">{{ counts }}</span></a></li>

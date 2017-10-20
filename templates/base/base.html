@@ -14,7 +14,11 @@
 <body>
 {% include 'base/navbar.html' %}
 <div id="main">
-    {% include 'base/sidebar.html' %}
+    <aside id="sidebar">
+        {% block sidebar %}
+            {% include 'base/sidebar.html' %}
+        {% endblock %}
+    </aside>
     <div id="content">
         {% include 'base/alert.html' %}
         {% block content %}

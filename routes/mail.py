@@ -41,6 +41,16 @@ def send():
     return redirect(url_for('mail.index'))
 
 
+@main.route('read_all')
+@login_required
+@token_required
+def read_all():
+    unread_mails = Mail.find_all(receiver_id=g.user.id, read=False)
+    for m in unread_mails:
+        m.mark_read()
+    return redirect(url_for('mail.index'))
+
+
 @main.route('/<int:m_id>')
 @login_required
 def detail(m_id):
