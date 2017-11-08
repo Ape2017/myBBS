@@ -64,6 +64,9 @@
                                 <img class="user-avatar-sm" src="{{ replier.user_avatar }}">
                                 <a href="{{ url_for('user.profile', username=replier.username) }}">
                                     <span>{{ replier.username }}</span>
+                                    {% if replier.id == author.id %}
+                                        <span class="label label-success">作者</span>
+                                    {% endif %}
                                 </a>
                                 <span>{{ loop.index }}楼 • <span class="time-stamp">{{ r.created_time }}</span></span>
                             </small>
