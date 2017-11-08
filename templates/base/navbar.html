@@ -39,6 +39,18 @@
                 {% if g.user.admin %}
                     <li><a href="{{ url_for('admin.index') }}">管理员</a></li>
                 {% endif %}
+                {% set themes = ['cosmo', 'cerulean', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'] %}
+                {% set current_theme = session.get('theme', 'cosmo') %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"  aria-expanded="false">主题 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for t in themes %}
+                            <li {% if t == current_theme %}class="active"{% endif %}>
+                                <a href="{{ url_for('index.change_theme', theme = t) }}">{{ t }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

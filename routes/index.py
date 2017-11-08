@@ -4,6 +4,7 @@ from flask import (
     request,
     g,
     redirect,
+    session,
 )
 from models.board import Board
 from models.topic import Topic
@@ -52,4 +53,9 @@ def search():
     google_search = google_search.format(host, query)
     return redirect(google_search)
 
+
+@main.route("/theme/<string:theme>")
+def change_theme(theme):
+    session['theme'] = theme
+    return redirect(request.referrer)
 
