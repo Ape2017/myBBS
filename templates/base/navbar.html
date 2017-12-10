@@ -15,7 +15,6 @@
                         (url_for('index.index'), '首页'),
                         (url_for("user.profile", username=g.user.username), g.user.username),
                         (url_for('mail.index'), '消息'),
-                        (url_for('index.index'), '关于'),
                         (url_for('user.setting'), '设置'),
                         (url_for('user.log_out'), '登出'),
                     ] %}
@@ -23,7 +22,6 @@
             {% else %}
                 {% set navbar = [
                         (url_for('index.index'), '首页'),
-                        (url_for('index.index'), '关于'),
                         (url_for('index.register'), '注册'),
                         (url_for('index.login'), '登录'),
                     ] %}
@@ -51,6 +49,7 @@
                         {% endfor %}
                     </ul>
                 </li>
+                <li><a href="https://github.com/enincc/myBBS">源码</a></li>
             </ul>
         </div>
     </div>
