@@ -4,7 +4,6 @@
 sudo su
 
 # 换成中科大的源
-# ln -f -s /root/myBBS/configuration/sources.list /etc/apt/sources.list
 sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 mkdir /root/.pip
 ln -f -s /root/myBBS/configuration/pip.conf /root/.pip/pip.conf
