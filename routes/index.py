@@ -9,6 +9,7 @@ from flask import (
 from models.board import Board
 from models.topic import Topic
 from auth import current_user
+from config import DOMAIN_NAME
 
 main = Blueprint('index', __name__)
 
@@ -48,7 +49,8 @@ def register():
 @main.route("/search")
 def search():
     query = request.args.get('query')
-    host = request.headers.get('Host')
+    # host = request.headers.get('Host')
+    host = DOMAIN_NAME
     google_search = 'https://www.google.com/search?q=site:{} {}'
     google_search = google_search.format(host, query)
     return redirect(google_search)
