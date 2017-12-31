@@ -27,3 +27,6 @@
 {% block content_body %}
     <div class="markdown-text markdown-body">{{ m.content }}</div>
 {% endblock %}
+{% block body_static %}
+    <script src="{{ url_for('static', filename='js/markdown.js') }}"></script>
+{% endblock %}
