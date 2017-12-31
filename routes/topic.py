@@ -48,7 +48,7 @@ def detail(t_id):
     else:
         u = t.user()
         # 传递 topic 的所有 reply 到 页面中
-        return render_template("topic/detail.html", topic=t, u=u)
+        return render_template("topic/detail.html", topic=t, author=u)
 
 
 @main.route("/delete")
