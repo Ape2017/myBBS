@@ -15,7 +15,7 @@
 
 - 安装依赖库 `pip install -r requirements.txt`
 
-- 运行前需要在 `config.py` 文件中修改密钥、数据库名、展示用帐户、新用户初始化等配置选项，可参照 `config_copy.py` 自行创建。
+- 运行前需要在 `config.py` 文件中修改密钥、数据库名等配置选项，可参照 `config_copy.py` 自行创建。
 
 - 第一个管理员需要手动添加，可注册新账号后修改并运行 `admin.sh` 脚本将该账号升级为管理员。
 
